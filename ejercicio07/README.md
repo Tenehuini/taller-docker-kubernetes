@@ -7,6 +7,7 @@ The images are nicopaez/jobvacancy-ruby:1.3.0 for web and postgres for db
 
 <br />
 ¿Puedes leer el docker-compose-jobvacancy.yml y describir lo que hace cada una de sus lineas?
+<pre>
 version: '2' is the version of the yml file<br />
 services: list the services <br />
   web: name of the image <br />
@@ -25,15 +26,14 @@ services: list the services <br />
     image: postgres the image used <br />
     environment: sets environment variable <br />
       POSTGRES_PASSWORD: Passw0rd! environment variable <br />
-
-
+</pre>
 <br />
 Dado que cada contenedor corre en forma aislada ¿Cómo es posible que esos contenedores se vean entre sí?
 Because they are in the same network. Using docker network ls we see: <br />
 NETWORK ID     NAME                  DRIVER    SCOPE <br />
 c80167d357a6   ejercicio07_default   bridge    local <br />
 Then we can use docker network inspect c80167d357a6 and the result is: <br />
-```
+<pre>
 [
     {
         "Name": "ejercicio07_default",
@@ -79,13 +79,12 @@ Then we can use docker network inspect c80167d357a6 and the result is: <br />
         "Labels": {}
     }
 ]
-```
+</pre>
 <br />
 The two containers listed have the id shown in docker container ls: <br />
-```
+<pre>
 CONTAINER ID   IMAGE                            COMMAND                  CREATED         STATUS         PORTS                                       NAMES
 f4b34c1947ea   nicopaez/jobvacancy-ruby:1.3.0   "/jobvacancy/start_a…"   5 minutes ago   Up 5 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   ejercicio07_web_1
 75433bff9692   postgres                         "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   5432/tcp                                    ejercicio07_db_1
-
-```
+</pre>
 
